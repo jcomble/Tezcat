@@ -1,0 +1,7 @@
+*.txt
+.classpath
+.project
+*.jar
+src/*.db
+src/*.txt
+.settings/
