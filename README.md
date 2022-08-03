@@ -1,8 +1,8 @@
 # Tezcat
-## _Le bot Discord pour les questionnaires énènementiels_
+## _Le bot Discord pour les questionnaires événementiels_
 
 **Tezcat** est un bot Discord entièrement développé en **Java** par soucis de performances et de réduction de l'empreinte carbone.
-Il permet de lancer un questionnaire préparé à l'avance pendant un évènement vocal, de récolter efficacement les réponses et d'afficher efficacement le top 5.
+Il permet de lancer un questionnaire préparé à l'avance pendant un événement vocal, de récolter efficacement les réponses et d'afficher efficacement le top 5.
 Le questionnaire perdure dans le temps, ainsi, il est possible de l'utiliser comme "Question du jour" pour soit récompenser les meilleurs, soit pour pouvoir uniquement poster des questions journalièrement.
 
 ## Commandes
