@@ -1,5 +1,5 @@
 # Tezcat
-## _Le bot Discord pour les questionnaires événementiels_
+## Le bot Discord pour les questionnaires événementiels
 
 **Tezcat** est un bot Discord entièrement développé en **Java** par soucis de performances et de réduction de l'empreinte carbone.
 
@@ -29,7 +29,7 @@ Les autres membres auront accès à la commande de base:
 - %help : affiche la liste de commande
 
 ## Scénario habituel
-### **Etape 1 - Créer le questionnaire**
+### Etape 1 - Créer le questionnaire
 Il faut déterminer le nombre de questions et la question par défaut, voici un exemple:
 > %creategame "Est-ce une musique officielle de Pokémon?" 10
 
