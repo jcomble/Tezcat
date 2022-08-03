@@ -68,7 +68,10 @@ Si vous avez besoin de plus de précisions voici une commande qui vous sera util
 Elle résume sur un fichier texte le classement entier, les bonnes réponses données et toutes les réponses données.
 
 ## Installation
-\-
+-Insérer un fichier "src/Tezcat.txt" contenant le token du bot Discord
+Les libraries spécifiées sont nécessaires :
+JDA-5.0.0-alpha.13-withDependencies.jar
+sqlite-jdbc-3.36.0.3.jar
 
 ## Droits d'usage:
 Author : jcomble
