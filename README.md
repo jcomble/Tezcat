@@ -29,7 +29,7 @@ Les autres membres auront accès à la commande de base:
 - %help : affiche la liste de commande
 
 ## Scénario habituel
-#### Etape 1 - Créer le questionnaire
+### Etape 1 - Créer le questionnaire
 Il faut déterminer le nombre de questions et la question par défaut, voici un exemple:
 > %creategame "Est-ce une musique officielle de Pokémon?" 10
 
@@ -56,7 +56,7 @@ Bien sûr si vous inversez une réponse sur *Faux*, elle passera sur *Vrai*.
 
 Voilà vous avez initialisé le questionnaire!
 
-#### Etape 2 - Lancer le questionnaire
+### Etape 2 - Lancer le questionnaire
 Maintenant il est temps de lancer le questionnaire. Pour cela, rien de bien compliqué:
 > %play
 
@@ -68,7 +68,7 @@ Laissez le temps aux participants de réagir, seule la première réaction effec
 
 Une fois le questionnaire fini, il ne reste plus qu'à récolter les résultats!
 
-#### Etape 3 - Afficher le top5 ou récupérer les résultats
+### Etape 3 - Afficher le top5 ou récupérer les résultats
 S'il vous suffit de connaître le top5, cette commande vous suffira:
 > %top5
 
