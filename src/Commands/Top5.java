@@ -51,6 +51,7 @@ public class Top5 extends DiscordCommand{
 			requete = "SELECT id_membre, COUNT(*) AS bonnes_reponses\n" +
 					"FROM Questions, ReponsesDonnees\n" + 
 					"WHERE ReponsesDonnees.numero_question = Questions.numero_question\n" +
+					"AND Questions.id_server = ReponsesDonnees.id_server\n" + 
 					"AND ReponsesDonnees.reponse = Questions.reponse\n" +
 					"AND ReponsesDonnees.id_server = " + guild.getId() + "\n" +
 					"GROUP BY id_membre\n" + 

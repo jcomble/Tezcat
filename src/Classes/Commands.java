@@ -23,7 +23,6 @@ import Commands.SwitchAnswer;
 import Commands.Test;
 import Commands.Top5;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
@@ -235,7 +234,7 @@ public class Commands extends ListenerAdapter {
 						role_modo = guild.getRoleById(id_modo);
 					}
 					Member member = guild.retrieveMemberById(user.getId()).completeAfter(20, TimeUnit.MILLISECONDS);
-					if (!member.hasPermission(Permission.ADMINISTRATOR) && (role_modo == null || !member.getRoles().contains(role_modo))) {
+					if (role_modo == null || !member.getRoles().contains(role_modo)) {
 						return;
 					}
 					requete = "UPDATE Game SET numero_question = " + String.valueOf(numero_question + 1) + " WHERE id_server = " + guild.getId() + ";";

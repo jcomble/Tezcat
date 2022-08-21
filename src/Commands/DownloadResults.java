@@ -13,6 +13,7 @@ import Classes.DiscordCommand;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.exceptions.ErrorResponseException;
 import net.dv8tion.jda.api.requests.RestAction;
 
 public class DownloadResults extends DiscordCommand {
@@ -60,6 +61,7 @@ public class DownloadResults extends DiscordCommand {
 			requete = "SELECT id_membre, COUNT(*) AS bonnes_reponses\n" +
 					"FROM Questions, ReponsesDonnees\n" + 
 					"WHERE ReponsesDonnees.numero_question = Questions.numero_question\n" +
+					"AND Questions.id_server = ReponsesDonnees.id_server\n" + 
 					"AND ReponsesDonnees.reponse = Questions.reponse\n" +
 					"AND ReponsesDonnees.id_server = " + guild.getId() + "\n" +
 					"GROUP BY id_membre\n" + 
@@ -74,9 +76,14 @@ public class DownloadResults extends DiscordCommand {
 					nom = liste_noms.get(index);
 				} else {
 					liste_ids.add(id_membre);
-					RestAction<Member> retrouve_membre = guild.retrieveMemberById(id_membre);
-					Member mbr = retrouve_membre.completeAfter(20, TimeUnit.MILLISECONDS);
-					nom = mbr.getEffectiveName();
+					RestAction<Member> retrouve_membre;
+					try {
+						 retrouve_membre = guild.retrieveMemberById(id_membre);
+						 Member mbr = retrouve_membre.completeAfter(20, TimeUnit.MILLISECONDS);
+						 nom = mbr.getEffectiveName();
+					} catch (ErrorResponseException e) {
+						nom = "INCONNU";
+					}
 					liste_noms.add(nom);
 				}
 				result += id_membre + ", " + nom + ", " + res.getString("bonnes_reponses") + "\n";
@@ -86,6 +93,7 @@ public class DownloadResults extends DiscordCommand {
 			requete = "SELECT id_membre, ReponsesDonnees.numero_question AS num, ReponsesDonnees.reponse AS rep\n" +
 					"FROM Questions, ReponsesDonnees\n" + 
 					"WHERE ReponsesDonnees.numero_question = Questions.numero_question\n" +
+					"AND Questions.id_server = ReponsesDonnees.id_server\n" + 
 					"AND ReponsesDonnees.reponse = Questions.reponse\n" +
 					"AND ReponsesDonnees.id_server = " + guild.getId() + "\n" +
 					"ORDER BY id_membre ASC, num ASC;";
@@ -99,12 +107,17 @@ public class DownloadResults extends DiscordCommand {
 					nom = liste_noms.get(index);
 				} else {
 					liste_ids.add(id_membre);
-					RestAction<Member> retrouve_membre = guild.retrieveMemberById(id_membre);
-					Member mbr = retrouve_membre.completeAfter(20, TimeUnit.MILLISECONDS);
-					nom = mbr.getEffectiveName();
+					RestAction<Member> retrouve_membre;
+					try {
+						 retrouve_membre = guild.retrieveMemberById(id_membre);
+						 Member mbr = retrouve_membre.completeAfter(20, TimeUnit.MILLISECONDS);
+						 nom = mbr.getEffectiveName();
+					} catch (ErrorResponseException e) {
+						nom = "INCONNU";
+					}
 					liste_noms.add(nom);
 				}
-				String booleen = res.getString("num") == "1" ? "Vrai" : "Faux";  
+				String booleen = res.getString("rep").equals("1") ? "Vrai" : "Faux";  
 				result += id_membre + ", " + nom + ", " + res.getString("num") + ", " + booleen + "\n";
 			}
 			res.close();
@@ -123,12 +136,17 @@ public class DownloadResults extends DiscordCommand {
 					nom = liste_noms.get(index);
 				} else {
 					liste_ids.add(id_membre);
-					RestAction<Member> retrouve_membre = guild.retrieveMemberById(id_membre);
-					Member mbr = retrouve_membre.completeAfter(20, TimeUnit.MILLISECONDS);
-					nom = mbr.getEffectiveName();
+					RestAction<Member> retrouve_membre;
+					try {
+						 retrouve_membre = guild.retrieveMemberById(id_membre);
+						 Member mbr = retrouve_membre.completeAfter(20, TimeUnit.MILLISECONDS);
+						 nom = mbr.getEffectiveName();
+					} catch (ErrorResponseException e) {
+						nom = "INCONNU";
+					}
 					liste_noms.add(nom);
 				}
-				String booleen = res.getString("num") == "1" ? "Vrai" : "Faux";  
+				String booleen = res.getString("rep").equals("1") ? "Vrai" : "Faux";  
 				result += id_membre + ", " + nom + ", " + res.getString("num") + ", " + booleen + "\n";
 			}
 			File myfile = new File("Resultats.txt");
