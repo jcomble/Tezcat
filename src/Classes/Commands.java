@@ -210,7 +210,7 @@ public class Commands extends ListenerAdapter {
 						EmbedBuilder embed = game.getEmbed();
 						requete = "SELECT Count(*) AS compt FROM ReponsesDonnees WHERE id_server = " + guild.getId() + " AND numero_question = " + String.valueOf(numero_question) + ";";
 						res = req.request(requete);
-						embed.setFooter(res.getString("compt") + " ont répondu");
+						embed.setFooter(res.getString("compt") + " personnes ont répondu!");
 						message.editMessageEmbeds(embed.build()).queueAfter(20, TimeUnit.MILLISECONDS);
 					} else {
 						res.close();
@@ -230,7 +230,7 @@ public class Commands extends ListenerAdapter {
 						EmbedBuilder embed = game.getEmbed();
 						requete = "SELECT Count(*) AS compt FROM ReponsesDonnees WHERE id_server = " + guild.getId() + " AND numero_question = " + String.valueOf(numero_question) + ";";
 						res = req.request(requete);
-						embed.setFooter(res.getString("compt") + " ont répondu");
+						embed.setFooter(res.getString("compt") + " personnes ont répondu!");
 						message.editMessageEmbeds(embed.build()).queueAfter(20, TimeUnit.MILLISECONDS);
 					} else {
 						res.close();
