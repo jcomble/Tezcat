@@ -203,15 +203,15 @@ public class Commands extends ListenerAdapter {
 					res = req.request(requete);
 					if (!res.next()) {
 						res.close();
+						requete = "INSERT INTO ReponsesDonnees VALUES (" + guild.getId() + ", " + user.getId() + ", 1, " + String.valueOf(numero_question) + ");";
+						System.out.println("SQL : " + requete);
+						req.update(requete);
 						EmbedGame game = new EmbedGame(guild, numero_question, req);
 						EmbedBuilder embed = game.getEmbed();
 						requete = "SELECT Count(*) AS compt FROM ReponsesDonnees WHERE id_server = " + guild.getId() + " AND numero_question = " + String.valueOf(numero_question) + ";";
 						res = req.request(requete);
 						embed.setFooter(res.getString("compt") + " ont répondu");
 						message.editMessageEmbeds(embed.build()).queueAfter(20, TimeUnit.MILLISECONDS);
-						requete = "INSERT INTO ReponsesDonnees VALUES (" + guild.getId() + ", " + user.getId() + ", 1, " + String.valueOf(numero_question) + ");";
-						System.out.println("SQL : " + requete);
-						req.update(requete);
 					} else {
 						res.close();
 					}
@@ -223,15 +223,15 @@ public class Commands extends ListenerAdapter {
 					res = req.request(requete);
 					if (!res.next()) {
 						res.close();
+						requete = "INSERT INTO ReponsesDonnees VALUES (" + guild.getId() + ", " + user.getId() + ", 0, " + String.valueOf(numero_question) + ");";
+						System.out.println("SQL : " + requete);
+						req.update(requete);
 						EmbedGame game = new EmbedGame(guild, numero_question, req);
 						EmbedBuilder embed = game.getEmbed();
 						requete = "SELECT Count(*) AS compt FROM ReponsesDonnees WHERE id_server = " + guild.getId() + " AND numero_question = " + String.valueOf(numero_question) + ";";
 						res = req.request(requete);
 						embed.setFooter(res.getString("compt") + " ont répondu");
 						message.editMessageEmbeds(embed.build()).queueAfter(20, TimeUnit.MILLISECONDS);
-						requete = "INSERT INTO ReponsesDonnees VALUES (" + guild.getId() + ", " + user.getId() + ", 0, " + String.valueOf(numero_question) + ");";
-						System.out.println("SQL : " + requete);
-						req.update(requete);
 					} else {
 						res.close();
 					}
