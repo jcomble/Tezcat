@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Nonnull;
 
+import Commands.ChangeColor;
 import Commands.Changeprefix;
 import Commands.Changequestion;
 import Commands.Creategame;
@@ -113,7 +114,8 @@ public class Commands extends ListenerAdapter {
 			Play.class,
 			DownloadResults.class,
 			Top5.class,
-			SetModoRole.class
+			SetModoRole.class,
+			ChangeColor.class
 		};
 		ArrayList<String> list_name = new ArrayList<String>();
 		for (Class<?> classe : list) {

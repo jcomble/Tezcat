@@ -18,7 +18,8 @@ public class Help extends DiscordCommand {
 		embed.setTitle("Aide:");
 		String value = "`" + prefix + "setmodorole` : Définit le rôle de modération du bot";
 		embed.addField("Commandes Admin :", value, false);
-		value = "`" + prefix + "changeprefix` : Changer le préfixe\n"
+		value = "`" + prefix + "changecolor` : Changer la couleur de la barre\n"
+				+ "`" + prefix + "changeprefix` : Changer le préfixe\n"
 				+ "`" + prefix + "changequestion` : Changer une question en particulier\n"
 				+ "`" + prefix + "creategame` : Initialise un questionnaire\n"
 				+ "`" + prefix + "downloadresults` : Télécharge les résultats du jeu\n"
