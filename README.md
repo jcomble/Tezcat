@@ -15,6 +15,7 @@ L'administrateur peut utiliser toutes les commandes et peut choisir un @rôle mo
 - %setmodorole : Définit le rôle qui modérera le bot
 
 Les modérateurs ont accès au reste des commandes:
+- %changecolor : change la couleur de la barre verticale
 - %changeprefix : change le prefix des commandes
 - %changequestion : change l'intitulé d'une question en particulier
 - %creategame : initialise un questionnaire à partir d'une question par défaut et le nombre de question y est défini
