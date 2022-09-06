@@ -43,8 +43,9 @@ public class ShowQuestions extends DiscordCommand {
 				channel.sendMessage("Tu n'es ni modérateur ni administrateur!").queueAfter(20, TimeUnit.MILLISECONDS);
 				return;
 			}
-			embedquestions = new EmbedQuestions(req, guild, 1);
+			embedquestions = new EmbedQuestions(req, guild, 1, color);
 			EmbedBuilder embed = embedquestions.getEmbed();
+			embed.setColor(color);
 			channel.sendMessageEmbeds(embed.build()).queueAfter(20, TimeUnit.MILLISECONDS,
 				msg -> {
 					msg.addReaction(Emoji.fromFormatted("⬅️")).queueAfter(20, TimeUnit.MILLISECONDS);

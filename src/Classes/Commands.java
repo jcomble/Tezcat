@@ -87,6 +87,7 @@ public class Commands extends ListenerAdapter {
         String content = message.getContentRaw();
         ArrayList<String> args = getargs(content);
         char prefix = '%';
+        int color = 16711680;
         try {
         	String requete = "SELECT * FROM Prefixes WHERE id_server = " + guild.getId() + ";";
         	System.out.println("SQL : " + requete);
@@ -94,6 +95,14 @@ public class Commands extends ListenerAdapter {
 			if (res.next()) {
 				prefix = res.getString("prefix").charAt(0);
 			}
+			res.close();
+			requete = "SELECT * FROM Colors WHERE id_server = " + guild.getId() + ";";
+        	System.out.println("SQL : " + requete);
+			res = req.request(requete);
+			if (res.next()) {
+				color = res.getString("color").charAt(0);
+			}
+			res.close();
 		} catch (ClassNotFoundException | SQLException e1) {
 		}
         
@@ -101,7 +110,7 @@ public class Commands extends ListenerAdapter {
 			return;
 		}
 		String suffixe = args.get(0).substring(1).toLowerCase();
-		CommandParameters params = new CommandParameters(channel, args, req, user, guild, message, prefix);
+		CommandParameters params = new CommandParameters(channel, args, req, user, guild, message, prefix, color);
 		Class<?>[] list = {
 			Test.class,
 			Help.class,
@@ -149,10 +158,16 @@ public class Commands extends ListenerAdapter {
 		Message message = event.getChannel().retrieveMessageById(event.getMessageId()).complete();
 		MessageReaction reaction = event.getReaction();
 		Emoji emoji = reaction.getEmoji();
-		if (emoji.getType().equals(Type.UNICODE) && (emoji.getFormatted().equals("⬅️") || emoji.getFormatted().equals("➡️"))) {
-			ResultSet res;
-			try {
-				String requete = "SELECT * FROM EmbedQuestions WHERE id_message = " + message.getId() + ";";
+		String requete = "SELECT * FROM Colors WHERE id_server = " + guild.getId() + ";";
+    	System.out.println("SQL : " + requete);
+    	try {
+			ResultSet res = req.request(requete);
+			int color = 16711680;
+			if (res.next()) {
+				color = res.getString("color").charAt(0);
+			}
+			if (emoji.getType().equals(Type.UNICODE) && (emoji.getFormatted().equals("⬅️") || emoji.getFormatted().equals("➡️"))) {
+				requete = "SELECT * FROM EmbedQuestions WHERE id_message = " + message.getId() + ";";
 				System.out.println("SQL : " + requete);
 				res = req.request(requete);
 				int page = 1;
@@ -177,22 +192,20 @@ public class Commands extends ListenerAdapter {
 				} else {
 					page = Math.min(page + 1 , max_page);
 				}
-				EmbedQuestions embedquestions = new EmbedQuestions(req, guild, page);
+				
+				res.close();
+				EmbedQuestions embedquestions = new EmbedQuestions(req, guild, page, color);
 				EmbedBuilder embed = embedquestions.getEmbed();
 				message.editMessageEmbeds(embed.build()).completeAfter(20, TimeUnit.MILLISECONDS);
 				requete = "UPDATE EmbedQuestions SET page = " + String.valueOf(page) + " WHERE id_message = " + message.getId() + ";";
 				System.out.println("SQL : " + requete);
 				req.update(requete);
 				reaction.removeReaction(user).completeAfter(20, TimeUnit.MILLISECONDS);
-			} catch (ClassNotFoundException | SQLException e1) {
-				e1.printStackTrace();
 			}
-		}
-		if (emoji.getType().equals(Type.UNICODE) && (emoji.getFormatted().equals("✅") || emoji.getFormatted().equals("❌") || emoji.getFormatted().equals("↘️"))) {
-			try {
-				String requete = "SELECT * FROM Game WHERE id_server = " + guild.getId() + " AND id_message = " + message.getId() + ";";
+			if (emoji.getType().equals(Type.UNICODE) && (emoji.getFormatted().equals("✅") || emoji.getFormatted().equals("❌") || emoji.getFormatted().equals("↘️"))) {
+				requete = "SELECT * FROM Game WHERE id_server = " + guild.getId() + " AND id_message = " + message.getId() + ";";
 				System.out.println("SQL : " + requete);
-				ResultSet res = req.request(requete);
+				res = req.request(requete);
 				if (!res.next()) {
 					res.close();
 					return;
@@ -208,7 +221,7 @@ public class Commands extends ListenerAdapter {
 						requete = "INSERT INTO ReponsesDonnees VALUES (" + guild.getId() + ", " + user.getId() + ", 1, " + String.valueOf(numero_question) + ");";
 						System.out.println("SQL : " + requete);
 						req.update(requete);
-						EmbedGame game = new EmbedGame(guild, numero_question, req);
+						EmbedGame game = new EmbedGame(guild, numero_question, req, color);
 						EmbedBuilder embed = game.getEmbed();
 						requete = "SELECT Count(*) AS compt FROM ReponsesDonnees WHERE id_server = " + guild.getId() + " AND numero_question = " + String.valueOf(numero_question) + ";";
 						res = req.request(requete);
@@ -228,7 +241,7 @@ public class Commands extends ListenerAdapter {
 						requete = "INSERT INTO ReponsesDonnees VALUES (" + guild.getId() + ", " + user.getId() + ", 0, " + String.valueOf(numero_question) + ");";
 						System.out.println("SQL : " + requete);
 						req.update(requete);
-						EmbedGame game = new EmbedGame(guild, numero_question, req);
+						EmbedGame game = new EmbedGame(guild, numero_question, req, color);
 						EmbedBuilder embed = game.getEmbed();
 						requete = "SELECT Count(*) AS compt FROM ReponsesDonnees WHERE id_server = " + guild.getId() + " AND numero_question = " + String.valueOf(numero_question) + ";";
 						res = req.request(requete);
@@ -269,14 +282,13 @@ public class Commands extends ListenerAdapter {
 						req.update(requete);
 					}
 					res.close();
-					EmbedGame embedgame = new EmbedGame(guild, numero_question + 1, req);
+					EmbedGame embedgame = new EmbedGame(guild, numero_question + 1, req, color);
 					EmbedBuilder embed = embedgame.getEmbed();
 					message.editMessageEmbeds(embed.build()).completeAfter(20, TimeUnit.MILLISECONDS);
 				}
-			} catch (ClassNotFoundException | SQLException e) {
-				e.printStackTrace();
-				return;
 			}
+		} catch (ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
 		}
 	}
 	

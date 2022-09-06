@@ -18,6 +18,7 @@ public class Test extends DiscordCommand {
 		EmbedBuilder embed = new EmbedBuilder();
 		embed.setTitle("Question n°X");
 		embed.setDescription("Est-ce qu'il s'agit d'une musique officielle de Pokémon?");
+		embed.setColor(color);
 		channel.sendMessageEmbeds(embed.build()).queueAfter(20, TimeUnit.MILLISECONDS,
 			msg -> {
 				msg.addReaction(Emoji.fromFormatted("✅")).queueAfter(20, TimeUnit.MILLISECONDS);

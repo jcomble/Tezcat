@@ -15,9 +15,12 @@ public class CommandParameters {
 	private Guild guild;
 	private Message message;
 	private char prefix;
+	private int color;
 	
+	
+
 	public CommandParameters(MessageChannel channel, ArrayList<String> args, SQLRequester req, User user, Guild guild,
-			Message message, char prefix) {
+			Message message, char prefix, int color) {
 		this.channel = channel;
 		this.args = args;
 		this.req = req;
@@ -25,6 +28,7 @@ public class CommandParameters {
 		this.guild = guild;
 		this.message = message;
 		this.prefix = prefix;
+		this.color = color;
 	}
 	
 	public MessageChannel getChannel() {
@@ -68,5 +72,11 @@ public class CommandParameters {
 	}
 	public void setPrefix(char prefix) {
 		this.prefix = prefix;
+	}
+	public int getColor() {
+		return color;
+	}
+	public void setColor(int color) {
+		this.color = color;
 	}
 }

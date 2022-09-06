@@ -52,8 +52,9 @@ public class NextQuestion extends DiscordCommand {
 			}
 			int numero_question = res.getInt("numero_question");
 			res.close();
-			EmbedGame embedgame = new EmbedGame(guild, numero_question + 1, req);
+			EmbedGame embedgame = new EmbedGame(guild, numero_question + 1, req, color);
 			EmbedBuilder embed = embedgame.getEmbed();
+			embed.setColor(color);
 			Message msg = channel.sendMessageEmbeds(embed.build()).completeAfter(20, TimeUnit.MILLISECONDS);
 			requete = "SELECT * FROM Questions WHERE id_server = " + guild.getId() + " AND numero_question = " + String.valueOf(numero_question + 1) + ";";
 			System.out.println("SQL : " + requete);

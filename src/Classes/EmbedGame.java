@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.entities.Guild;
 public class EmbedGame {
 	private EmbedBuilder embed;
 	
-	public EmbedGame(Guild guild, int numero_question, SQLRequester req) {
+	public EmbedGame(Guild guild, int numero_question, SQLRequester req, int color) {
 		try {
 			ResultSet res = req.request("SELECT * FROM Questions WHERE id_server = " + guild.getId() + " AND numero_question = " + String.valueOf(numero_question) + ";");
 			if (res.next()) {
@@ -17,11 +17,13 @@ public class EmbedGame {
 				EmbedBuilder embed = new EmbedBuilder();
 				embed.setTitle("Question n°" + String.valueOf(numero_question));
 				embed.setDescription(question);
+				embed.setColor(color);
 				this.embed = embed;
 			} else {
 				EmbedBuilder embed = new EmbedBuilder();
 				embed.setTitle("Le questionnaire est terminé!");
 				embed.setDescription("Laisse les animateurs vérifier les résultats du jeu!");
+				embed.setColor(color);
 				this.embed = embed;
 			}
 			res.close();

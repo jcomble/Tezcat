@@ -57,7 +57,7 @@ public class Play extends DiscordCommand{
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		EmbedGame embedgame = new EmbedGame(guild, 1, req);
+		EmbedGame embedgame = new EmbedGame(guild, 1, req, color);
 		channel.sendMessageEmbeds(embedgame.getEmbed().build()).queueAfter(20, TimeUnit.MILLISECONDS,
 			msg -> {
 				try {

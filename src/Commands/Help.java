@@ -29,6 +29,7 @@ public class Help extends DiscordCommand {
 				+ "`" + prefix + "switchanswer` : Inverse la réponse des questions choisies\n"
 				+ "`" + prefix + "top5` : Affiche le top 5 du jeu\n";
 		embed.addField("Commandes Modérateurs :", value, false);
+		embed.setColor(color);
 		channel.sendMessageEmbeds(embed.build()).queueAfter(20, TimeUnit.MILLISECONDS);
 	}
 }

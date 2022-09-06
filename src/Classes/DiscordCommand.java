@@ -16,7 +16,8 @@ public abstract class DiscordCommand {
 	protected char prefix;
 	protected SQLRequester req;
 	protected User user;
-
+	protected int color;
+	
 	public DiscordCommand(CommandParameters params) {
 		this.args = params.getArgs();
 		this.channel = params.getChannel();
@@ -25,6 +26,7 @@ public abstract class DiscordCommand {
 		this.prefix = params.getPrefix();
 		this.req = params.getReq();
 		this.user = params.getUser();
+		this.color = params.getColor();
 	}
 	
 	public abstract void execute();

@@ -9,8 +9,7 @@ import net.dv8tion.jda.api.entities.Guild;
 
 public class EmbedQuestions {
 	EmbedBuilder embed;
-	
-	public EmbedQuestions(SQLRequester req, Guild guild, int page) throws ClassNotFoundException, SQLException {
+	public EmbedQuestions(SQLRequester req, Guild guild, int page, int color) throws ClassNotFoundException, SQLException {
 		ResultSet res = req.request("SELECT * FROM Questions WHERE id_server = " + guild.getId() + " ORDER BY numero_question;");
 		ArrayList<String> questions = new ArrayList<String>();
 		ArrayList<String> reponses = new ArrayList<String>();
@@ -37,6 +36,7 @@ public class EmbedQuestions {
 				break;
 			}
 		}
+		embed.setColor(color);
 		this.embed = embed;
 	}
 

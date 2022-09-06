@@ -68,6 +68,7 @@ public class Top5 extends DiscordCommand{
 					break;
 				}
 			}
+			embed.setColor(color);
 			res.close();
 			channel.sendMessageEmbeds(embed.build()).queueAfter(20, TimeUnit.MILLISECONDS);
 		} catch (ClassNotFoundException | SQLException e1) {
