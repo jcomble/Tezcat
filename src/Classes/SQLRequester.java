@@ -46,6 +46,17 @@ public class SQLRequester {
 				+ ");");
 		}
 	}
+	
+	private void initialise_colors(DatabaseMetaData dbm) throws SQLException {
+		ResultSet tables = dbm.getTables(null, null, "Colors", null);
+		if (!tables.next()) {
+		update("CREATE TABLE \"Colors\" (\r\n"
+				+ "	\"id_server\"	INTEGER NOT NULL,\r\n"
+				+ "	\"color\"	INTEGER NOT NULL DEFAULT 16711680\r\n"
+				+ ");");
+		}
+	}
+	
 	private void initialise_questions(DatabaseMetaData dbm) throws SQLException {
 		ResultSet tables = dbm.getTables(null, null, "Questions", null);
 		if (!tables.next()) {
@@ -104,11 +115,11 @@ public class SQLRequester {
 	private void initialise() throws SQLException {
 		DatabaseMetaData dbm = con.getMetaData();
 		initialise_prefixes(dbm);
+		initialise_colors(dbm);
 		initialise_questions(dbm);
 		initialise_embedquestions(dbm);
 		initialise_game(dbm);
 		initialise_reponsesdonnees(dbm);
 		initialise_modos(dbm);
 	}
-
 }
