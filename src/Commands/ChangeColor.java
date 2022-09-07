@@ -40,7 +40,7 @@ public class ChangeColor extends DiscordCommand {
 	@Override
 	public void execute() {
 		if (args.size() != 2) {
-			channel.sendMessage("`" + prefix + "changecolor #HEX` seulement!");
+			channel.sendMessage("`" + prefix + "changecolor #HEX` seulement!").queueAfter(20, TimeUnit.MILLISECONDS);
 			return;
 		}
 		String code = args.get(1).toLowerCase();
@@ -48,7 +48,7 @@ public class ChangeColor extends DiscordCommand {
 			code = code.substring(1, code.length() - 1);
 		}
 		if (!check_hex(code)) {
-			channel.sendMessage("Mauvais code couleur");
+			channel.sendMessage("Mauvais code couleur").queueAfter(20, TimeUnit.MILLISECONDS);
 			return;
 		}
 		try {
