@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import Classes.CommandParameters;
 import Classes.DiscordCommand;
+import net.dv8tion.jda.api.EmbedBuilder;
 
 public class Survey extends DiscordCommand{
 
@@ -17,6 +18,7 @@ public class Survey extends DiscordCommand{
 			channel.sendMessage("`" + prefix + "survey \"Question\"` seulement!").queueAfter(20, TimeUnit.MILLISECONDS);
 			return;
 		}
+		EmbedBuilder embed = new EmbedBuilder();
 		
 	}
 
