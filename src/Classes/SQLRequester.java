@@ -68,6 +68,37 @@ public class SQLRequester {
 				+ ");");
 		}
 	}
+	
+	private void initialise_sondage(DatabaseMetaData dbm) throws SQLException {
+		ResultSet tables = dbm.getTables(null, null, "Modos", null);
+		if (!tables.next()) {
+		update("CREATE TABLE \"Sondage\" (\r\n"
+				+ "	\"Question\"	TEXT NOT NULL,\r\n"
+				+ "	\"id_serveur\"	INTEGER NOT NULL,\r\n"
+				+ "	\"rep1\"	TEXT,\r\n"
+				+ "	\"rep2\"	TEXT,\r\n"
+				+ "	\"rep3\"	TEXT,\r\n"
+				+ "	\"rep4\"	TEXT,\r\n"
+				+ "	\"rep5\"	TEXT,\r\n"
+				+ "	\"rep6\"	TEXT,\r\n"
+				+ "	\"rep7\"	TEXT,\r\n"
+				+ "	\"rep8\"	TEXT,\r\n"
+				+ "	\"rep9\"	TEXT,\r\n"
+				+ "	\"rep10\"	TEXT,\r\n"
+				+ "	\"rep11\"	TEXT,\r\n"
+				+ "	\"rep12\"	TEXT,\r\n"
+				+ "	\"rep13\"	TEXT,\r\n"
+				+ "	\"rep14\"	TEXT,\r\n"
+				+ "	\"rep15\"	TEXT,\r\n"
+				+ "	\"rep16\"	TEXT,\r\n"
+				+ "	\"rep17\"	TEXT,\r\n"
+				+ "	\"rep18\"	TEXT,\r\n"
+				+ "	\"rep19\"	TEXT,\r\n"
+				+ "	\"rep20\"	TEXT\r\n"
+				+ ");");
+		}
+	}
+	
 	private void initialise_embedquestions(DatabaseMetaData dbm) throws SQLException {
 		ResultSet tables = dbm.getTables(null, null, "EmbedQuestions", null);
 		if (!tables.next()) {
@@ -118,6 +149,7 @@ public class SQLRequester {
 		initialise_colors(dbm);
 		initialise_questions(dbm);
 		initialise_embedquestions(dbm);
+		initialise_sondage(dbm);
 		initialise_game(dbm);
 		initialise_reponsesdonnees(dbm);
 		initialise_modos(dbm);
